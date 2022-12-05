@@ -1,0 +1,5 @@
+mongod --dbpath D:\chattingApp\data\db
+mongod --dbpath D:\chattingApp\data\db --replSet replicaSet1
+
+ npm i --save jsonwebToken
+  npm i --save dotenv  

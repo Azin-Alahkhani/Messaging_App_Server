@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+model user {
+  id Int  @id @default(autoincrement())
+  firstName String
+  lastName String
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  recieved message[] @relation("reciever")
+  sent message[] @relation("sender")
+}
+model message {
+    id Int  @id @default(autoincrement())
+    text String
+    recieverId Int 
+    reciever user @relation("reciever", fields: [recieverId], references: [id],onDelete: NoAction, onUpdate: NoAction)
+    senderId Int
+    sender user @relation("sender", fields: [senderId], references: [id],onDelete: NoAction, onUpdate: NoAction)
+    sentAt DateTime @default(now())
+}
+
